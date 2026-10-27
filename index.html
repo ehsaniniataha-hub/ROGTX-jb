@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en" manifest="cache.appcache">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>TAHA PS4 HOST</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #050914;
+      --panel: rgba(10, 18, 39, .94);
+      --line: #244879;
+      --blue: #1685ff;
+      --violet: #9b5cff;
+      --text: #e8f1ff;
+      --muted: #9bb1d3;
+      --green: #54f0a0;
+      --red: #ff6b88;
+      --yellow: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: radial-gradient(ellipse at 50% -20%, #193a73 0%, #0b1530 36%, var(--bg) 76%);
+      color: var(--text);
+      font: 15px/1.5 "Segoe UI", system-ui, sans-serif;
+    }
+    body { min-height: 100vh; }
+    #brand {
+      position: relative;
+      text-align: center;
+      padding: 21px 12px 17px;
+      background: linear-gradient(180deg, rgba(12, 24, 51, .98), rgba(5, 10, 25, .96));
+      border-bottom: 1px solid var(--line);
+      box-shadow: 0 5px 28px rgba(0, 105, 255, .17);
+    }
+    #brand b {
+      display: inline-block;
+      color: #f7fbff;
+      font-size: 21px;
+      font-weight: 800;
+      letter-spacing: .22em;
+      text-shadow: 0 0 12px rgba(22, 133, 255, .8), 0 0 26px rgba(155, 92, 255, .35);
+    }
+    #spin {
+      position: fixed;
+      top: calc(50% + 12px);
+      left: 50%;
+      width: 48px;
+      height: 48px;
+      margin: -24px 0 0 -24px;
+      border: 4px solid #1a2b4b;
+      border-top-color: var(--blue);
+      border-right-color: var(--violet);
+      border-radius: 50%;
+      box-shadow: 0 0 22px rgba(22, 133, 255, .16);
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    #msg {
+      position: fixed;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      padding: 0 20px;
+      text-align: center;
+      font-size: 16px;
+      letter-spacing: .5px;
+      display: none;
+      color: var(--text);
+    }
+    #wrap { padding: 0; }
+    #state, #out { display: none; }
+    body.done #spin, body.fail #spin { display: none; }
+    body.fail #msg { display: block; color: var(--red); }
+    body.done #msg {
+      display: block;
+      color: var(--green);
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    body.log #spin, body.log #msg { display: none; }
+    body.log #wrap { padding: 16px 18px 54px; }
+    body.log #state {
+      display: block;
+      font-size: 22px;
+      font-weight: 750;
+      margin: 0 0 10px;
+      color: #7db8ff;
+      text-shadow: 0 0 12px rgba(22, 133, 255, .22);
+    }
+    body.log #out {
+      display: block;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+      font: 12px/1.55 Consolas, "SFMono-Regular", monospace;
+      background: rgba(3, 8, 21, .94);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 13px 14px;
+      height: calc(100vh - 150px);
+      overflow-y: auto;
+      box-shadow: inset 0 0 24px rgba(15, 65, 130, .12), 0 8px 28px rgba(0, 0, 0, .2);
+    }
+    .ok, .safe { color: var(--green); }
+    .bad, .danger { color: var(--red); }
+    .warn { color: var(--yellow); }
+    code { color: #9cc7ff; }
+    #credit {
+      position: fixed;
+      z-index: 5;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 11px 8px calc(11px + env(safe-area-inset-bottom, 0px));
+      text-align: center;
+      color: #a8caff;
+      background: linear-gradient(180deg, rgba(5, 9, 20, 0), rgba(5, 9, 20, .96) 28%);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px rgba(22, 133, 255, .75);
+      pointer-events: none;
+    }
+    @media (max-width: 520px) {
+      #brand { padding: 18px 10px 15px; }
+      #brand b { font-size: 17px; letter-spacing: .16em; }
+      body.log #wrap { padding: 12px 10px 54px; }
+      body.log #out { height: calc(100vh - 145px); padding: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <div id="brand"><b>PS4 HOST</b></div>
+  <div id="spin" aria-hidden="true"></div>
+  <div id="msg">Restart your console</div>
+  <div id="wrap">
+    <div id="state"></div>
+    <div id="out"></div>
+  </div>
+  <div id="credit">coded by taha by love</div>
+  <script type="module">
+    import "./jb.js?v=19";
+  </script>
+</body>
+</html>
